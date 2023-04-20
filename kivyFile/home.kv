@@ -1,0 +1,74 @@
+MDScreen:
+    name: "home"
+    md_bg_color:1,1,1,1
+    MDBoxLayout:
+        orientation:'vertical'
+        MDBoxLayout:
+            size_hint_y:.25
+            padding:dp(25)
+            MDBoxLayout:
+                orientation:"vertical"
+                MDLabel:
+                    text:"Welcome, UC Student"
+                    font_style:"H4"
+                MDBoxLayout:
+                    adaptive_size:True
+                    spacing:dp(10)
+
+        MDGridLayout:
+            size_hint_y:.75
+            cols:2
+            padding:[dp(15),dp(15),dp(15),dp(35)]
+            spacing:dp(15)
+
+            ElementCard:
+                size: (60,60)
+                image:"assets/info.png"
+                text:"Poin KP"
+                Button:
+                    text: 'Poin KP'
+
+            ElementCard:
+                size: (60,60)
+                image:"assets/reminder.png"
+                text:"Info"
+
+            ElementCard:
+                size: (60,60)
+                image:"assets/user.png"
+                text:"Profile"
+
+            ElementCard:
+                size: (60,60)
+                image:"assets/logout.png"
+            # Button:
+            #     text: 'Logout'
+            #     on_release: app.sign_out()
+
+<ElementCard@MDCard>:
+    md_bg_color:69/255,55/255,86/255,1
+    padding:dp(15)
+    spacing:dp(15)
+    radius:dp(25)
+    ripple_behavior: True
+    image:''
+    text:""
+    items_count:""
+    subtext:''
+
+    orientation:'vertical'
+    Image:
+        source:root.image
+    MDBoxLayout:
+        orientation:'vertical'
+        MDLabel:
+            halign:"center"
+            text:root.text
+            font_style:"H6"
+        MDLabel:
+            halign:"center"
+            font_style:"Caption"
+            text:root.subtext
+        MDLabel:
+            halign:"center"
+            text:root.items_count
