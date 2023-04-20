@@ -22,6 +22,7 @@ MDScreen:
             spacing:dp(15)
 
             ElementCard:
+                id: poin_kp
                 size: (60,60)
                 image:"assets/info.png"
                 text:"Poin KP"
@@ -29,21 +30,30 @@ MDScreen:
                     text: 'Poin KP'
 
             ElementCard:
+                id: info
                 size: (60,60)
                 image:"assets/reminder.png"
                 text:"Info"
+                Button:
+                    text: 'Info'
 
             ElementCard:
+                id: email
                 size: (60,60)
                 image:"assets/user.png"
                 text:"Profile"
+                Button:
+                    text: 'Profile'
 
             ElementCard:
+                id: logout
                 size: (60,60)
                 image:"assets/logout.png"
-            # Button:
-            #     text: 'Logout'
-            #     on_release: app.sign_out()
+                text: 'Logout'
+                Button:
+                    font_size: dp(20)
+                    on_release: app.sign_out("dayuuu@gmail.com", "test1234")
+
 
 <ElementCard@MDCard>:
     md_bg_color:69/255,55/255,86/255,1
