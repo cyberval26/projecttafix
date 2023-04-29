@@ -72,7 +72,7 @@ MDScreen:
             background_color: 0,0,0,0
             font_name: "Roboto"
             on_release:
-                app.send_data(email.text,password.text)
+                app.login(email.text,password.text)
             canvas.before:
                 Color:
                     rgb: rgba(52,0,231,255)

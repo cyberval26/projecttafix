@@ -44,6 +44,10 @@ MDScreen:
                 text:"Profile"
                 Button:
                     text: 'Profile'
+                    font_size: dp(20)
+                    on_release: 
+                        root.manager.transition.direction = "left"
+                        root.manager.current = "profile"
 
             ElementCard:
                 id: logout
@@ -51,8 +55,9 @@ MDScreen:
                 image:"assets/logout.png"
                 text: 'Logout'
                 Button:
+                    text:'Logout'
                     font_size: dp(20)
-                    on_release: app.sign_out("dayuuu@gmail.com", "test1234")
+                    on_release: app.sign_out(app.uid)
 
 
 <ElementCard@MDCard>:

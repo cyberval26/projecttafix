@@ -27,8 +27,9 @@ MDScreen:
 
         MDFloatLayout:
             size_hint: .7, .07
-            pos_hint: {"center_x": .5, "center_y": .63}
+            pos_hint: {"center_x": .5, "center_y": .70}
             TextInput:
+                id: email
                 hint_text:"Email"
                 font_name: "Roboto"
                 size_hint_y: .75
@@ -46,8 +47,9 @@ MDScreen:
 
         MDFloatLayout:
             size_hint: .7, .07
-            pos_hint: {"center_x": .5, "center_y": .5}
+            pos_hint: {"center_x": .5, "center_y": .60}
             TextInput:
+                id: password
                 hint_text:"Password"
                 font_name: "Roboto"
                 size_hint_y: .75
@@ -62,16 +64,75 @@ MDScreen:
             MDFloatLayout:
                 pos_hint: {"center_x": .45, "center_y": 0}
                 size_hint_y: .03
+                md_bg_color: rgba(178,178,178,255)   
+                   
+        MDFloatLayout:
+            size_hint: .7, .07
+            pos_hint: {"center_x": .5, "center_y": .50}
+            TextInput:
+                id: nim
+                hint_text:"Nomor Induk Mahasiswa"
+                font_name: "Roboto"
+                size_hint_y: .75
+                pos_hint:{"center_x": .43, "center_y": .5}
+                background_color: 1,1,1,0
+                foreground_color: rgba(0,0,59,255)
+                cursor_color: rgba(0,0,59,255)
+                font_size: "14sp"
+                cursor_width: "2sp"
+                multiline: False
+            MDFloatLayout:
+                pos_hint: {"center_x": .45, "center_y": 0}
+                size_hint_y: .03
+                md_bg_color: rgba(178,178,178,255)      
+
+        MDFloatLayout:
+            size_hint: .7, .07
+            pos_hint: {"center_x": .5, "center_y": .40}
+            TextInput:
+                id: poinkp
+                hint_text:"Kredit Poin"
+                font_name: "Roboto"
+                size_hint_y: .75
+                pos_hint:{"center_x": .43, "center_y": .5}
+                background_color: 1,1,1,0
+                foreground_color: rgba(0,0,59,255)
+                cursor_color: rgba(0,0,59,255)
+                font_size: "14sp"
+                cursor_width: "2sp"
+                multiline: False
+            MDFloatLayout:
+                pos_hint: {"center_x": .45, "center_y": 0}
+                size_hint_y: .03
+                md_bg_color: rgba(178,178,178,255)
+
+        MDFloatLayout:
+            size_hint: .7, .07
+            pos_hint: {"center_x": .5, "center_y": .30}
+            TextInput:
+                id: nopol
+                hint_text:"Nopol Kendaraan"
+                font_name: "Roboto"
+                size_hint_y: .75
+                pos_hint:{"center_x": .43, "center_y": .5}
+                background_color: 1,1,1,0
+                foreground_color: rgba(0,0,59,255)
+                cursor_color: rgba(0,0,59,255)
+                font_size: "14sp"
+                cursor_width: "2sp"
+                multiline: False
+            MDFloatLayout:
+                pos_hint: {"center_x": .45, "center_y": 0}
+                size_hint_y: .03
                 md_bg_color: rgba(178,178,178,255)      
         Button:
-            text: "LOGIN"
+            text: "SIGN UP"
             size_hint: .66, .065
-            pos_hint: {"center_x": .5, "center_y": .34}
+            pos_hint: {"center_x": .5, "center_y": .20}
             background_color: 0,0,0,0
             font_name: "Roboto"
             on_release:
-                root.manager.transition.direction = "left"
-                root.manager.current = "login"
+                app.signup(email.text,password.text, nim.text, nopol.text, poinkp.text)
             canvas.before:
                 Color:
                     rgb: rgba(52,0,231,255)
@@ -80,17 +141,17 @@ MDScreen:
                     pos: self.pos
                     radius: [5]
         MDLabel:
-            text: "Don't have an account?"
+            text: "Already have an account?"
             font_name: "Roboto"
             font_size: "11sp"
-            pos_hint: {"center_x": .70, "center_y": .25}
+            pos_hint: {"center_x": .70, "center_y": .15}
             color: rgba(135, 133, 193, 255)
         MDTextButton:
-            text: "Sign up"
+            text: "Login"
             font_name: "Roboto"
             font_size: "11sp"
-            pos_hint: {"center_x": .73, "center_y": .25}
+            pos_hint: {"center_x": .73, "center_y": .15}
             color: rgba(135,133,193,255)
             on_release:
                 root.manager.transition.direction = "left"
-                root.manager.current = "main"
+                root.manager.current = "login"
