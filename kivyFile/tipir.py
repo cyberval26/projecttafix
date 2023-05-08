@@ -40,12 +40,12 @@ class main(MDApp):
         
     def build(self):
         # screen_manager.add_widget(Builder.load_file("pre-splash.kv"))
-        Builder.load_file('profile.kv')
         self.screen_manager.add_widget(Builder.load_file("main.kv"))
         self.screen_manager.add_widget(Builder.load_file("home.kv"))
         self.screen_manager.add_widget(Builder.load_file("login.kv"))
         self.screen_manager.add_widget(Builder.load_file("signup.kv"))
-        self.screen_manager.add_widget(profile_screen(name='profile'))
+        Builder.load_file('profile.kv')
+        self.screen_manager.add_widget(ProfileScreen(name='profile'))
         return self.screen_manager
     
     def signup(self, email:str, password:str, nim:str, nopol:str, poinkp:str):
@@ -86,7 +86,7 @@ class main(MDApp):
     def sign_out(self):
         pass
 
-class profile_screen(MDScreen):
+class ProfileScreen(MDScreen):
     email_label = ObjectProperty()
     nim_label = ObjectProperty()
     nopol_label = ObjectProperty()
@@ -94,14 +94,10 @@ class profile_screen(MDScreen):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.email = ""
-        self.nim = ""
-        self.nopol = ""
-        self.poinkp = ""
 
     def on_pre_enter(self):
-        print(current_user)
-        print(current_user_data)
+        # print(current_user)
+        # print(current_user_data)
         self.email_label.text = current_user['email']
         self.nim_label.text = current_user_data['nim']
         self.nopol_label.text = current_user_data['nopol']

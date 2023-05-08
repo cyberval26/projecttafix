@@ -25,6 +25,7 @@ MDScreen:
                 id: poin_kp
                 size: (60,60)
                 image:"assets/info.png"
+                background_color: 255/255,213/255,128/255,1
                 text:"Poin KP"
                 Button:
                     text: 'Poin KP'
@@ -33,6 +34,7 @@ MDScreen:
                 id: info
                 size: (60,60)
                 image:"assets/reminder.png"
+                background_color: 255/255,213/255,128/255,1
                 text:"Info"
                 Button:
                     text: 'Info'
@@ -45,6 +47,7 @@ MDScreen:
                 Button:
                     text: 'Profile'
                     font_size: dp(20)
+                    background_color: 255/255,213/255,128/255,1
                     on_release: 
                         root.manager.transition.direction = "left"
                         root.manager.current = "profile"
@@ -56,12 +59,13 @@ MDScreen:
                 text: 'Logout'
                 Button:
                     text:'Logout'
+                    background_color: 255/255,213/255,128/255,1
                     font_size: dp(20)
                     on_release: app.sign_out(app.uid)
 
 
 <ElementCard@MDCard>:
-    md_bg_color:69/255,55/255,86/255,1
+    md_bg_color:255/255,213/255,128/255,1
     padding:dp(15)
     spacing:dp(15)
     radius:dp(25)
