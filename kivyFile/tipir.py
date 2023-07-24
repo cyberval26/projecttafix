@@ -1,6 +1,8 @@
 import pyrebase
 import requests
 
+import config
+
 from kivy.uix.screenmanager import ScreenManager
 from kivymd.app import MDApp
 from kivy.lang import Builder
@@ -78,13 +80,9 @@ class main(MDApp):
             self.root.current = 'home'
         except requests.exceptions.HTTPError:
             print('Invalid email or password')
-    
-    def on_start(self):
-        pass
 
-    
     def sign_out(self):
-        pass
+        self.root.current = 'login'
 
 class ProfileScreen(MDScreen):
     email_label = ObjectProperty()
@@ -102,6 +100,19 @@ class ProfileScreen(MDScreen):
         self.nim_label.text = current_user_data['nim']
         self.nopol_label.text = current_user_data['nopol']
         self.poinkp_label.text = current_user_data['poinkp'] 
+            
+
+class InfoScreen(MDScreen):
+    email_label = ObjectProperty()
+    nim_label = ObjectProperty()
+    nopol_label = ObjectProperty()
+    poinkp_label = ObjectProperty()
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+    def on_pre_enter(self):
+        pass
             
 if __name__ == '__main__':
     from kivy.config import Config

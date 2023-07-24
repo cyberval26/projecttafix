@@ -3,9 +3,8 @@ import time
 import datetime
 import pyrebase
 import pytesseract
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import db
+# from firebase_admin import credentials
+# from firebase_admin import db
 
 
 cam = cv2.VideoCapture(0)
@@ -17,7 +16,9 @@ config = {
   "storageBucket": "projecttaiot.appspot.com"
 }
 
+# https://github.com/nhorvath/Pyrebase4
 firebase = pyrebase.initialize_app(config)
+db = firebase.database()
 storage = firebase.storage()
 
 print("Send Data to Firebase Using Raspberry Pi")
@@ -74,8 +75,8 @@ while True:
             counter += 1
     
     # Show the image on the screen if available
-    if 'image' in locals():
-        cv2.imshow('Imagetest',image)
+    # if 'image' in locals():
+    #     cv2.imshow('Imagetest',image)
     
     # Wait for a key press for 1 millisecond
     k = cv2.waitKey(1)
