@@ -1,0 +1,41 @@
+<HistoryScreen>:
+    # history_maps : history_maps
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: ('20dp', '20dp', '20dp', '20dp')
+        MDIconButton:
+            icon: "arrow-left"
+            user_font_size: "30sp"
+            theme_text_color: "Custom"
+            text_color: rgba(26,24,58,255)
+            pos_hint: {"center_x": .04, "center_y": .5}
+            on_release:
+                root.manager.transition.direction = "right"
+                root.manager.current = "home"
+        ScrollView:
+            MDGridLayout:
+                id: grid_layout
+                cols: 2
+                size_hint_y: None
+                height: self.minimum_height if self.minimum_height > root.height else root.height
+                MDLabel:
+                    text: root.get_table_data()[0]['timestamp']
+                on_parent:
+                    for history_map in root.get_table_data(): self.add_widget(MDLabel(text=history_map['timestamp']))
+                        MDLabel:
+                            text: history_map['timestamp']
+                        MDLabel:
+                            text: history_map['plate']
+            # on_parents:
+            #     for history_map in root.get_table_data():
+            #         label_text = history_map['timestamp']
+            #         self.add_widget(MDLabel(text=label_text))
+            #         label_text = history_map['plate']
+            #         self.add_widget(MDLabel(text=label_text))
+                # Image:
+                #     source: 'image1.jpg'
+                    # MDLabel:
+                    #     text: history_map['timestamp']
+                    # MDLabel:
+                    #     text: history_map['plate']
