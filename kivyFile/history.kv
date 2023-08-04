@@ -15,10 +15,15 @@
                 root.manager.current = "home"
 
         ScrollView:
+            do_scroll_x: True
+            # do_scroll_y: True
+            # bar_pos_x: 'bottom'
             MDGridLayout:
                 id: grid_layout
                 cols: 3
                 size_hint_y: None
+                # size_hint_x: 1000
+                width: 1000
                 height: self.minimum_height if self.minimum_height > root.height else root.height
 
                 MDLabel:
@@ -29,27 +34,3 @@
                     
                 MDLabel:
                     text: 'Image'
-
-    # on_kv_post:
-    #     [grid_layout.add_widget(MDLabel(text="Label " + str(i))) for i in range(9)]
-                    # for i in range(10):
-                    #     MDLabel:
-                    #         text: i
-                    #         size_hint_y: None
-                    #         height: dp(50)
-                    # for history_map in root.get_table_data():
-                    #     MDLabel:
-                    #         text: history_map['timestamp']
-                    #         size_hint_y: None
-                    #         height: dp(50)
-                    #     MDLabel:
-                    #         text: history_map['plate']
-                    #         size_hint_y: None
-                    #         height: dp(50)
-                    # for history_map in root.get_table_data():
-                    #     grid_layout.add_widget(MDLabel(text=history_map['timestamp']))
-                    #     grid_layout.add_widget(MDLabel(text=history_map['plate']))
-    # on_enter:
-    #     for history_map in root.get_table_data():
-    #         grid_layout.add_widget(MDLabel(text=history_map['timestamp']))
-    #         grid_layout.add_widget(MDLabel(text=history_map['plate']))

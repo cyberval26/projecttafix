@@ -1,5 +1,8 @@
+from datetime import datetime
 import pyrebase
 import requests
+import re
+import webbrowser
 
 import config
 
@@ -11,6 +14,8 @@ from kivymd.uix.screen import MDScreen
 from kivy.properties import ObjectProperty
 from kivymd.uix.label import MDLabel
 from kivy.uix.label import Label
+from kivy.uix.image import AsyncImage
+from kivy.uix.behaviors import ButtonBehavior
 
 
 firebaseConfig = {
@@ -35,6 +40,10 @@ Window.size = (310, 580)
 current_user = None
 current_user_data = None
 
+
+class ImageButton(ButtonBehavior, AsyncImage):
+    def on_release(self):
+        webbrowser.open(self.source)
 
 class main(MDApp):
     uid = None
@@ -113,8 +122,9 @@ class HistoryScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-    def get_table_data(self):
+    def get_firestore_data(self):
         history_maps = []
+        print('current_user', current_user)
         history_maps.append({
             'timestamp': '2023-07-17 04:06:17.525977+00:00',
             'plate': 'b1378',
@@ -128,33 +138,23 @@ class HistoryScreen(Screen):
         return history_maps
     
     def on_pre_enter(self):
-        # print('pre enter')
-        self.ids.grid_layout.add_widget(MDLabel(text="pre enter"))
-        # self.add_widget(Label())
-        history_maps = []
-        history_maps.append({
-            'timestamp': '2023-07-17 04:06:17.525977+00:00',
-            'plate': 'b1378',
-            'image_url': 'https://storage.googleapis.com/projecttafix-4b39d.appspot.com/2023-07-17%2004%3A06%3A17.525977%2B00%3A00b1378',
-        })
-        history_maps.append({
-            'timestamp': '2023-07-17 04:06:17.525977+00:00',
-            'plate': 'b139rfs',
-            'image_url': 'https://storage.googleapis.com/projecttafix-4b39d.appspot.com/2023-07-21%2004%3A53%3A25.896769%2B00%3A00b139rfs',
-        })
+        history_maps = self.get_firestore_data()
+
         for history_map in history_maps:
-            self.ids.grid_layout.add_widget(MDLabel(text=history_map['timestamp']))
-            self.ids.grid_layout.add_widget(MDLabel(text=history_map['plate']))
-            self.ids.grid_layout.add_widget(MDLabel(text=history_map['image_url']))
-        # print(history_maps)
-        # self.history_map.data = history_maps
-        # print('Entering history')
-    #     # print(current_user)
-    #     # print(current_user_data)
-    #     self.email_label.text = current_user['email']
-    #     self.nim_label.text = current_user_data['nim']
-    #     self.nopol_label.text = current_user_data['nopol']
-    #     self.poinkp_label.text = current_user_data['poinkp']
+            timestamp = history_map['timestamp']
+            dt_object = datetime.fromisoformat(timestamp.replace("Z", "+00:00"))
+            timestamp = dt_object.strftime("%Y-%m-%d %H:%M:%S")
+            
+            plate = history_map['plate']
+            plate = plate.upper()
+            plate = re.sub('(\d+)', r' \1 ', plate).strip()
+
+            imageurl = history_map['image_url']
+
+            self.ids.grid_layout.add_widget(MDLabel(text=timestamp))
+            self.ids.grid_layout.add_widget(MDLabel(text=plate))
+            self.ids.grid_layout.add_widget(ImageButton(source=imageurl))
+            # self.ids.grid_layout.add_widget(MDLabel(text=imageurl))
 
 
 class InfoScreen(MDScreen):
@@ -177,3 +177,4 @@ if __name__ == '__main__':
     Config.set('kivy', 'keyboard_provider', 'kivy')
 
     main().run()
+
