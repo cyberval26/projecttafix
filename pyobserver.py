@@ -3,6 +3,7 @@ from time import sleep
 import pandas as pd
 import firebase_admin
 from firebase_admin import credentials, firestore, storage
+from google.cloud.firestore_v1.base_query import FieldFilter
 
 path = 'C:\\Users\\ASUS\\stream'
 
@@ -54,6 +55,16 @@ def upload_to_firebase(dict_data):
                 'image_url': blob.public_url,
             }
             document_ref.set(d)
+
+            query = db.collection('mahasiswa').where(filter=FieldFilter('nopol', '==', data['plate']))
+            mahasiswa_data = query.get()[0].to_dict()
+            mahasiswa_data['poinkp'] = str(int(mahasiswa_data['poinkp']) - 1)
+            mahasiswa_id = query.get()[0].id
+
+            mahasiswa_doc_ref = db.collection('mahasiswa').document(mahasiswa_id)
+            mahasiswa_doc_ref.set(mahasiswa_data)
+
+
 
 
     if uploaded_something:
