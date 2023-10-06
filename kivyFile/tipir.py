@@ -133,6 +133,7 @@ class HistoryScreen(Screen):
 
     def get_firestore_data(self):
         history_maps = []
+        self.ids.grid_layout.clear_widgets()
         query = fsdb.collection('plates').where('plate', '==', current_user_data['nopol'])
         docs = query.get()
         for doc in docs:
