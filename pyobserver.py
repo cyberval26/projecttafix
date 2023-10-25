@@ -25,7 +25,8 @@ def list_csv():
         else:
             parse_csv(csv_files[-1])
     except Exception as e:
-        print(e)
+        pass
+        # print(e)
 
 def parse_csv(file):
     df = pd.read_csv(f'{path}\\{file}')

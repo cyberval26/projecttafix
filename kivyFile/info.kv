@@ -1,0 +1,31 @@
+<InfoScreen>:
+    poinkp_label: poinkp_label_id
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: ('10dp', '10dp', '10dp', '10dp')
+        
+        MDIconButton:
+            icon: "arrow-left"
+            user_font_size: "30sp"
+            theme_text_color: "Custom"
+            text_color: rgba(26,24,58,255)
+            pos_hint: {"center_x": .04, "center_y": .5}
+            on_release:
+                root.manager.transition.direction = "right"
+                root.manager.current = "home" 
+        
+        MDGridLayout:
+            cols: 2
+            md_bg_color: 1,1,1,1
+        
+        MDLabel:
+            text: "Kredit Poin: "
+            font_name: 'Roboto'
+            color: rgba(0,0,59,255)
+
+        MDLabel:
+            id: poinkp_label_id
+            text: '100'
+            font_name: 'Roboto'
+            color: rgba(0,0,59,255)

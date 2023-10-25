@@ -17,6 +17,7 @@ from kivymd.uix.label import MDLabel
 from kivy.uix.label import Label
 from kivy.uix.image import AsyncImage
 from kivy.uix.behaviors import ButtonBehavior
+from kivy.event import EventDispatcher
 
 import firebase_admin
 from firebase_admin import credentials
@@ -71,6 +72,8 @@ class main(MDApp):
         self.screen_manager.add_widget(ProfileScreen(name='profile'))
         Builder.load_file('history.kv')
         self.screen_manager.add_widget(HistoryScreen(name='history'))
+        Builder.load_file('info.kv')
+        self.screen_manager.add_widget(InfoScreen(name='info'))
         return self.screen_manager
 
     def signup(self, email: str, password: str, nim: str, nopol: str, poinkp: str):
@@ -115,7 +118,7 @@ class ProfileScreen(MDScreen):
     email_label = ObjectProperty()
     nim_label = ObjectProperty()
     nopol_label = ObjectProperty()
-    poinkp_label = ObjectProperty()
+    # poinkp_label = ObjectProperty()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -124,7 +127,7 @@ class ProfileScreen(MDScreen):
         self.email_label.text = current_user['email']
         self.nim_label.text = current_user_data['nim']
         self.nopol_label.text = current_user_data['nopol']
-        self.poinkp_label.text = current_user_data['poinkp']
+        # self.poinkp_label.text = current_user_data['poinkp']
 
 
 class HistoryScreen(Screen):
@@ -160,18 +163,18 @@ class HistoryScreen(Screen):
             self.ids.grid_layout.add_widget(ImageButton(source=imageurl))
 
 
-class InfoScreen(MDScreen):
-    email_label = ObjectProperty()
-    nim_label = ObjectProperty()
-    nopol_label = ObjectProperty()
+class InfoScreen(MDScreen, EventDispatcher):
     poinkp_label = ObjectProperty()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
     def on_pre_enter(self):
-        pass
+        current_user_data = dict(fsdb.collection("mahasiswa").document(current_user['localId']).get().to_dict())
+        self.poinkp_label.text = current_user_data['poinkp']
 
+    def handle_database_update(self, updated_poinkp):
+            self.poinkp_label.text = updated_poinkp
 
 if __name__ == '__main__':
     from kivy.config import Config

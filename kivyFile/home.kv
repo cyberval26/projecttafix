@@ -26,9 +26,9 @@ MDScreen:
                 size: (60,60)
                 image:"assets/info.png"
                 background_color: 255/255,213/255,128/255,1
-                text:"Riwayat"
+                text:"History"
                 Button:
-                    text: 'Riwayat'
+                    text: 'History'
                     on_release: 
                         root.manager.transition.direction = "left"
                         root.manager.current = "history"
@@ -43,7 +43,7 @@ MDScreen:
                     text: 'Info'
                     on_release: 
                         root.manager.transition.direction = "left"
-                        root.manager.current = "history"
+                        root.manager.current = "info"
 
             ElementCard:
                 id: email
